@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicationPlan.WebApi", "MedicationPlan\MedicationPlan.WebApi.csproj", "{FD278F29-068E-488A-9F45-2C287232919E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicationPlan.WebApi", "MedicationPlan\MedicationPlan.WebApi.csproj", "{FD278F29-068E-488A-9F45-2C287232919E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicationPlan.Domain", "MedicationPlan.Domain\MedicationPlan.Domain.csproj", "{2DD44E57-5971-4855-9D98-F3E8A5F03B14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicationPlan.Domain", "MedicationPlan.Domain\MedicationPlan.Domain.csproj", "{2DD44E57-5971-4855-9D98-F3E8A5F03B14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicationPlan.Application", "MedicationPlan.Application\MedicationPlan.Application.csproj", "{5CB53E41-A9FC-4238-A0F9-F05E492A0B09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicationPlan.Application", "MedicationPlan.Application\MedicationPlan.Application.csproj", "{5CB53E41-A9FC-4238-A0F9-F05E492A0B09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicationPlan.Persistence", "MedicationPlan.Persistence\MedicationPlan.Persistence.csproj", "{85DFDC26-76D3-4327-95A8-F14E1BF760D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicationPlan.Persistence", "MedicationPlan.Persistence\MedicationPlan.Persistence.csproj", "{85DFDC26-76D3-4327-95A8-F14E1BF760D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicationPlan.Tests", "MedicationPlan.Tests\MedicationPlan.Tests.csproj", "{9B0CED36-B078-4367-B368-0F11E6B9EB51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroservicesMedicationPlan.Tests", "MedicationPlan.Tests\MicroservicesMedicationPlan.Tests.csproj", "{9B0CED36-B078-4367-B368-0F11E6B9EB51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

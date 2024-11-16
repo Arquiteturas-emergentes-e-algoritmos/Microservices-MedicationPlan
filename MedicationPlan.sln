@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicationPlan.Application"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicationPlan.Persistence", "MedicationPlan.Persistence\MedicationPlan.Persistence.csproj", "{85DFDC26-76D3-4327-95A8-F14E1BF760D2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroservicesMedicationPlan.Tests", "MedicationPlan.Tests\MicroservicesMedicationPlan.Tests.csproj", "{9B0CED36-B078-4367-B368-0F11E6B9EB51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicationPlan.Tests", "MedicationPlan.Tests\MedicationPlan.Tests.csproj", "{9B0CED36-B078-4367-B368-0F11E6B9EB51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

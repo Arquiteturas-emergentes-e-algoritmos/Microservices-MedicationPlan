@@ -1,4 +1,4 @@
-﻿using MedicationPlan.Domain;
+﻿using MedicationPlan.Domain.Entities;
 
 namespace MedicationPlan.Tests.Domain;
 
@@ -10,7 +10,7 @@ public class DomainTests
     [DataRow("2023-01-01T08:00:00", "2023-01-01T11:00:00")]
     public void AddMedication_ShouldAddAndSortMedicationsByTakeAt(string takeAt1, string takeAt2)
     {
-        var medicationPlan = new MedicationPlan.Domain.MedicationPlan();
+        var medicationPlan = new MedicationPlan.Domain.Entities.MedicationPlan();
         var medication1 = new Medication { Id = Guid.NewGuid(), TakeAt = DateTime.Parse(takeAt1) };
         var medication2 = new Medication { Id = Guid.NewGuid(), TakeAt = DateTime.Parse(takeAt2) };
 
@@ -25,7 +25,7 @@ public class DomainTests
     [DataRow("2023-01-01T08:00:00")]
     public void RemoveMedication_ShouldRemoveMedicationById(string takeAt)
     {
-        var medicationPlan = new MedicationPlan.Domain.MedicationPlan();
+        var medicationPlan = new MedicationPlan.Domain.Entities.MedicationPlan();
         var medicationId = Guid.NewGuid();
         var medication = new Medication { Id = medicationId, TakeAt = DateTime.Parse(takeAt) };
         medicationPlan.AddMedication(medication);
@@ -40,7 +40,7 @@ public class DomainTests
     [DataRow("2023-01-01T09:00:00", "2023-01-01T10:30:00")]
     public void UpdateMedication_ShouldUpdateExistingMedicationAndSortByTakeAt(string oldTakeAt, string newTakeAt)
     {
-        var medicationPlan = new MedicationPlan.Domain.MedicationPlan();
+        var medicationPlan = new MedicationPlan.Domain.Entities.MedicationPlan();
         var medicationId = Guid.NewGuid();
         var oldMedication = new Medication { Id = medicationId, TakeAt = DateTime.Parse(oldTakeAt) };
         medicationPlan.AddMedication(oldMedication);

@@ -29,6 +29,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MedicationPlan.Application\MedicationPlan.Application.csproj" />
     <ProjectReference Include="..\MedicationPlan.Domain\MedicationPlan.Domain.csproj" />
+    <ProjectReference Include="..\MedicationPlan.Persistence\MedicationPlan.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

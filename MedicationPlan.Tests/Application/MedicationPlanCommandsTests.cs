@@ -1,9 +1,7 @@
-﻿
-
-using MedicationPlan.Application.Command;
+﻿using MedicationPlan.Application.Command;
 using MedicationPlan.Domain.Entities;
 
-namespace MedicationPlan.Tests.Commands;
+namespace MedicationPlan.Tests.Application;
 
 [TestClass]
 public class MedicationPlanCommandTests

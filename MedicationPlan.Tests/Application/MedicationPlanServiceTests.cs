@@ -4,102 +4,101 @@ using MedicationPlan.Application.Services;
 using MedicationPlan.Domain.Entities;
 using Moq;
 
-namespace MedicationPlan.Tests
+namespace MedicationPlan.Tests.Application;
+
+[TestClass]
+public class MedicationPlanServiceTests
 {
-    [TestClass]
-    public class MedicationPlanServiceTests
+    private Mock<IMedicationPlanRepository> _mockRepository = null!;
+    private MedicationPlanService _medicationPlanService = null!;
+
+    [TestInitialize]
+    public void Setup()
     {
-        private Mock<IMedicationPlanRepository> _mockRepository;
-        private MedicationPlanService _medicationPlanService;
+        _mockRepository = new Mock<IMedicationPlanRepository>();
+        _medicationPlanService = new MedicationPlanService(_mockRepository.Object);
+    }
 
-        [TestInitialize]
-        public void Setup()
+    [TestMethod]
+    public void Handle_AddMedicationCommand_ShouldAddMedicationAndReturnSuccess()
+    {
+        // Arrange
+        var planId = Guid.NewGuid();
+        var command = new AddMedicationCommand { UserId = planId, Name = "Aspirin", TakeAt = DateTime.Now };
+        var medicationPlan = new MedicationPlan.Domain.Entities.MedicationPlan
         {
-            _mockRepository = new Mock<IMedicationPlanRepository>();
-            _medicationPlanService = new MedicationPlanService(_mockRepository.Object);
-        }
+            Id = planId
+        };
+        _mockRepository.Setup(repo => repo.GetById(planId)).Returns(medicationPlan);
 
-        [TestMethod]
-        public void Handle_AddMedicationCommand_ShouldAddMedicationAndReturnSuccess()
+        // Act
+        var response = _medicationPlanService.Handle(command);
+
+        // Assert
+        Assert.AreEqual(200, response.Status);
+        _mockRepository.Verify(repo => repo.Update(medicationPlan), Times.Once);
+    }
+
+    [TestMethod]
+    public void Handle_GetMedicationPlanCommand_ShouldReturnMedicationPlan()
+    {
+        // Arrange
+        var planId = Guid.NewGuid();
+        var command = new GetMedicationPlanCommand { UserId = planId };
+        var medicationPlan = new MedicationPlan.Domain.Entities.MedicationPlan
         {
-            // Arrange
-            var planId = Guid.NewGuid();
-            var command = new AddMedicationCommand { UserId = planId, Name = "Aspirin", TakeAt = DateTime.Now };
-            var medicationPlan = new MedicationPlan.Domain.Entities.MedicationPlan
-            {
-                Id = planId
-            };
-            _mockRepository.Setup(repo => repo.GetById(planId)).Returns(medicationPlan);
+            Id = planId
+        };
+        _mockRepository.Setup(repo => repo.GetById(planId)).Returns(medicationPlan);
 
-            // Act
-            var response = _medicationPlanService.Handle(command);
+        // Act
+        var response = _medicationPlanService.Handle(command);
 
-            // Assert
-            Assert.AreEqual(200, response.Status);
-            _mockRepository.Verify(repo => repo.Update(medicationPlan), Times.Once);
-        }
+        // Assert
+        Assert.AreEqual(200, response.Status);
+        Assert.AreEqual(medicationPlan, response.Data);
+    }
 
-        [TestMethod]
-        public void Handle_GetMedicationPlanCommand_ShouldReturnMedicationPlan()
+    [TestMethod]
+    public void Handle_UpdateMedicationCommand_ShouldUpdateMedicationAndReturnSuccess()
+    {
+        // Arrange
+        var planId = Guid.NewGuid();
+        var medication = new Medication("Ibuprofen", DateTime.Now);
+        var command = new UpdateMedicationCommand { UserId = planId, Medication = medication };
+        var medicationPlan = new MedicationPlan.Domain.Entities.MedicationPlan
         {
-            // Arrange
-            var planId = Guid.NewGuid();
-            var command = new GetMedicationPlanCommand { UserId = planId };
-            var medicationPlan = new MedicationPlan.Domain.Entities.MedicationPlan
-            {
-                Id = planId
-            };
-            _mockRepository.Setup(repo => repo.GetById(planId)).Returns(medicationPlan);
+            Id = planId
+        };
+        _mockRepository.Setup(repo => repo.GetById(planId)).Returns(medicationPlan);
 
-            // Act
-            var response = _medicationPlanService.Handle(command);
+        // Act
+        var response = _medicationPlanService.Handle(command);
 
-            // Assert
-            Assert.AreEqual(200, response.Status);
-            Assert.AreEqual(medicationPlan, response.Data);
-        }
+        // Assert
+        Assert.AreEqual(200, response.Status);
+        _mockRepository.Verify(repo => repo.Update(medicationPlan), Times.Once);
+    }
 
-        [TestMethod]
-        public void Handle_UpdateMedicationCommand_ShouldUpdateMedicationAndReturnSuccess()
+    [TestMethod]
+    public void Handle_DeleteMedicationCommand_ShouldDeleteMedicationAndReturnSuccess()
+    {
+        // Arrange
+        var planId = Guid.NewGuid();
+        var medicationId = Guid.NewGuid();
+        var command = new DeleteMedicationCommand { UserId = planId, MedicationId = medicationId };
+        var medicationPlan = new MedicationPlan.Domain.Entities.MedicationPlan
         {
-            // Arrange
-            var planId = Guid.NewGuid();
-            var medication = new Medication("Ibuprofen", DateTime.Now);
-            var command = new UpdateMedicationCommand { UserId = planId, Medication = medication };
-            var medicationPlan = new MedicationPlan.Domain.Entities.MedicationPlan
-            {
-                Id = planId
-            };
-            _mockRepository.Setup(repo => repo.GetById(planId)).Returns(medicationPlan);
+            Id = planId
+        };
+        medicationPlan.AddMedication(new Medication("Paracetamol", DateTime.Now) { Id = medicationId });
+        _mockRepository.Setup(repo => repo.GetById(planId)).Returns(medicationPlan);
 
-            // Act
-            var response = _medicationPlanService.Handle(command);
+        // Act
+        var response = _medicationPlanService.Handle(command);
 
-            // Assert
-            Assert.AreEqual(200, response.Status);
-            _mockRepository.Verify(repo => repo.Update(medicationPlan), Times.Once);
-        }
-
-        [TestMethod]
-        public void Handle_DeleteMedicationCommand_ShouldDeleteMedicationAndReturnSuccess()
-        {
-            // Arrange
-            var planId = Guid.NewGuid();
-            var medicationId = Guid.NewGuid();
-            var command = new DeleteMedicationCommand { UserId = planId, MedicationId = medicationId };
-            var medicationPlan = new MedicationPlan.Domain.Entities.MedicationPlan
-            {
-                Id = planId
-            };
-            medicationPlan.AddMedication(new Medication("Paracetamol", DateTime.Now) { Id = medicationId });
-            _mockRepository.Setup(repo => repo.GetById(planId)).Returns(medicationPlan);
-
-            // Act
-            var response = _medicationPlanService.Handle(command);
-
-            // Assert
-            Assert.AreEqual(200, response.Status);
-            _mockRepository.Verify(repo => repo.Update(medicationPlan), Times.Once);
-        }
+        // Assert
+        Assert.AreEqual(200, response.Status);
+        _mockRepository.Verify(repo => repo.Update(medicationPlan), Times.Once);
     }
 }

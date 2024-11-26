@@ -8,6 +8,15 @@ namespace MedicationPlan.WebApi.Controllers;
 [Route("/v1/medication")]
 public class MedicationPlanController : ControllerBase
 {
+
+    [Route("healthcheck")]
+    [HttpPost]
+    [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
+    public IActionResult PostAddMedication()
+    {
+        return Ok("Alive");
+    }
+
     [Route("")]
     [HttpPost]
     [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
@@ -31,6 +40,7 @@ public class MedicationPlanController : ControllerBase
             return StatusCode(500, ex);
         }
     }
+
     [Route("")]
     [HttpGet]
     [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]

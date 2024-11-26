@@ -17,7 +17,7 @@ public class MedicationPlanCommandTests
     {
         var command = new AddMedicationCommand
         {
-            MedicationPlanId = Guid.Parse(medicationPlanId),
+            UserId = Guid.Parse(medicationPlanId),
             Name = name,
             TakeAt = DateTime.Parse(takeAt)
         };
@@ -34,7 +34,7 @@ public class MedicationPlanCommandTests
     {
         var command = new DeleteMedicationCommand
         {
-            MedicationPlanId = Guid.NewGuid(),
+            UserId = Guid.NewGuid(),
             MedicationId = Guid.Parse(medicationPlanId)
         };
 
@@ -53,7 +53,7 @@ public class MedicationPlanCommandTests
         var medication = new Medication { Name = name, TakeAt = DateTime.Parse(takeAt) };
         var command = new UpdateMedicationCommand
         {
-            MedicationPlanId = Guid.Parse(medicationPlanId),
+            UserId = Guid.Parse(medicationPlanId),
             Medication = medication
         };
 
